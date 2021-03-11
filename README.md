@@ -47,7 +47,7 @@ As chamadas REST para a API:
   - 404 not found:
     - Pauta não encontrada para o id: {pauta_id}
   
-# - POST localhost:8080/interview/voto/{cpf}/votacao/{votacao_id}
+# - PUT localhost:8080/interview/voto/{cpf}/votacao/{votacao_id}
   Descrição solicitada: Receber votos dos associados em pautas (os votos são apenas 'Sim'/'Não'. Cada associado é identificado por um id único e pode votar apenas uma vez por pauta)
   O request deve ser feito passando o cpf do associado (considerado como id), o id da votação e o voto [SIM, NAO] como parâmetro obrigatório
   Exemplo: localhost:8080/interview/voto/73199495044/votacao/1?voto=SIM
@@ -62,7 +62,7 @@ As chamadas REST para a API:
     - A sessão de votação informada está encerrada
     - O usuário informado já registrou voto para esta sessão de votação
   
-# - POST localhost:8080/interview/resultado/{votacao_id}
+# - GET localhost:8080/interview/resultado/{votacao_id}
   Descrição solicitada: Contabilizar os votos e dar o resultado da votação na pauta
   O request deve ser feito passando o id da votação.
   
