@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "316f1770-5e6d-4958-a7fb-2a5f06debc75",
+		"name": "InterviewIBM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "01. Criar Pauta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Deve retornar status code 'CREATED'.\", function() {\r",
+							"    pm.expect(pm.response.code).to.eql(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Deve atribuir o id da pauta a variável 'pauta_id'.\", function() {\r",
+							"    pm.globals.set(\"pauta_id\", pm.response.json().id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"Pauta Teste 2\",\r\n    \"descricao\": \"Esta é uma pauta de teste.\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/interview/pauta",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"interview",
+						"pauta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "02. Abrir Sessão",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Deve retornar status code 'CREATED'.\", function() {\r",
+							"    pm.expect(pm.response.code).to.eql(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Deve atribuir o id da votação a variável 'votacao_id'.\", function() {\r",
+							"    pm.globals.set(\"votacao_id\", pm.response.json().id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/interview/abrir-sessao/{{pauta_id}}?fechamento=300",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"interview",
+						"abrir-sessao",
+						"{{pauta_id}}"
+					],
+					"query": [
+						{
+							"key": "fechamento",
+							"value": "300"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "03. Registrar Voto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/interview/voto/08731200001/votacao/{{votacao_id}}?voto=SIM",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"interview",
+						"voto",
+						"08731200001",
+						"votacao",
+						"{{votacao_id}}"
+					],
+					"query": [
+						{
+							"key": "voto",
+							"value": "SIM"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "04. Resultado Votação",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/interview/resultado/{{votacao_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"interview",
+						"resultado",
+						"{{votacao_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
